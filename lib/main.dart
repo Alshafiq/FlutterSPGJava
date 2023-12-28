@@ -57,31 +57,34 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller = TextEditingController();
-  String data = "MDAwMDY0gAoSGPG4EU3IGGOw4v92k0psBW5Xp/ns5fEpPROCcF5cDn3kuOfdn5sSMACiimEzt+daZPisTp2w1UX8saltTId2UFMLStBryQUgeJoz4r0MAS3IEtkVKzMMHuSaevxN4Wr0bYmIRMs+AMNG8JxlnyFvB4rlZNVmZdLfK/uGvNSeeZ1I1v6L6/TJvXib/BTTpGHn+5hj8o0sBAMXVLwCGDj32p/ImEtS9ao6ef86h1RdDO1FS2R8eGjH+OCVbKDlCqE0SpXbKwpbmbUtDrUkFPEnaQwa+Ntuw3OTuLzSZvxtfcRInZpveDICnoDmIX6oOb5GA/XVpHyqHe5xegzGOzPWSh6Pl4Q62Qt0aS0vMlijuibdDXOSqv9EQCfQc54eGx05pAghEzVAtRsnzLsv3+mr8bVpyM8bIpiHD4vFiNEErlVL1riM4u7NJNzxQlwyeeLGWpdp+x2OvlC1xyHL2eJ2uKkCuoTxkWdn+fRSuuc+sziEQt2kLPYiTv47j/kvHMkI4XHvZIR3ckAeGLVR07AmhIrFwJ3fdvYzmK9QyySxkxTFqfk95d0vCdHLemyb4cG7qyw7g4PER1uMjVPy4bIRjUNYOQc7NwK03y0cA/u+tLXQuRd8aLuo0U5g0U+kA7pYe76mjHbzCKMi7iFNutZKnlCpEbU55eRp40m0A7YVJgrlQZDls2OAsgqkWgX8WcWdnkAqKZvHZyQi5EYUb+LVD8ICkDiDq/Gel/2D6HYeKZ7ljjUFAXE2+9l4JzHHe13MltrYpZ85ozyHmt6cHsXwBRg+HcZBRiu4R/rqYX9N1Io/hEgJmwy2wleVQmVkNoBHRt8dUPMNKnIhNvqTYKFzbCvBTCTbYZLB5IFOpShcG5deReRcM7DL1K6K2RV7ihw8lbW6smlxr6R/MUXVwKlo5FEAOgh/4FZC97auYicy5/qLMXA2rbnMrFIRfMb/8WRdAeCCC8XjtRlb33L3dawvf8Tof87ImwDb/ctZrDg9U0vD5lR+M27ApWXuqWNgHmBBqCeG721VRjoc9Xeyal85dzN01TmhP6dFO89uImbAY1p+TEwgkt/w9XPkUTFZzSu8ZXVOOtWvcP1RTsloBtaWzBptXK1alB+dcngJQD7Iwb6ZErJckV3MHTNPAl1gggANc8uTJpiMpZARx2r466JF1G77J8/PXYqtNgYG80HIrRLPqhIb+Rb0+eCSf7tm4BScpmoXcUkUnGDOzNWWpPAxOD/j938O2l7tSsx7584vh4GaH8R2LHMaE9kDgPQMD/ZI7ow5Dn4TT1NPZOYv5FNnQDvhvTJzFAVK2AxRtnwjitYQFlzNUwoZnjGKEOgX6RnJNNVhLbfeCJEjq9ys2tpO9qoa+ZJZ";
 
   //for ANDROID
   static const platform = MethodChannel('com.example.flutter_spg_java/main');
 
   void _incrementCounter() {
+    String data = _controller.text;
+
+    var sendMap = <String, dynamic>{
+      'dataString': data
+    };
+
+    platform.invokeMethod('spayPlaceOrder', sendMap);
+
+    //for IOS
+    // const url = 'sarawakpay://merchantappscheme?data';
+    // if (await canLaunch(url)) {
+    //   await launch(url);
+    // } else {
+    //   throw 'Could not launch $url';
+    // }
+
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-
-      var sendMap = <String, dynamic>{
-        'dataString': data
-      };
-      platform.invokeMethod('spayPlaceOrder', sendMap);
-
-      //for IOS
-      // const url = 'sarawakpay://merchantappscheme?data';
-      // if (await canLaunch(url)) {
-      //   await launch(url);
-      // } else {
-      //   throw 'Could not launch $url';
-      // }
+      // _counter++;
     });
   }
 
